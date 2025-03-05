@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Assinatura</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 500px; margin: auto; }
+        .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+        button { margin-top: 10px; padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Visão do Operador</h2>
+            <input type="text" id="stageInput" placeholder="Nome do Stage">
+            <button onclick="solicitarAssinatura()">Solicitar Assinatura</button>
+        </div>
+
+        <div class="card">
+            <h2>Painel de Solicitações</h2>
+            <div id="solicitacoes"></div>
+        </div>
+    </div>
+
+    <script>
+        function solicitarAssinatura() {
+            let stage = document.getElementById("stageInput").value;
+            if (stage) {
+                let lista = document.getElementById("solicitacoes");
+                let item = document.createElement("div");
+                item.classList.add("card");
+                let hora = new Date().toLocaleTimeString();
+                item.innerHTML = `${stage} - ${hora} <button onclick="removerSolicitacao(this)">Solicitação Atendida</button>`;
+                lista.appendChild(item);
+                document.getElementById("stageInput").value = "";
+            }
+        }
+        
+        function removerSolicitacao(botao) {
+            botao.parentElement.remove();
+        }
+    </script>
+</body>
+</html>
